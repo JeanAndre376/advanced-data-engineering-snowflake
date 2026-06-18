@@ -57,19 +57,20 @@ raw zone table build
 -- country table build
 
 -- todo: complete table build
-CREATE TABLE {{env}}_tasty_bytes.raw_pos.country
+CREATE OR REPLACE TABLE {{env}}_tasty_bytes.raw_pos.country
 (
    country_id NUMBER(18,0),
    country VARCHAR(16777216),
    iso_currency VARCHAR(3),
    iso_country VARCHAR(2),
    city VARCHAR(16777216),
-   city_population VARCHAR(16777216)
+   city_population VARCHAR(16777216),
+   city_id NUMBER(19,0)
 );
 
 
 -- franchise table build
-CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.franchise
+CREATE TABLE IF NOT EXISTS {{env}}_tasty_bytes.raw_pos.franchise
 (
    franchise_id NUMBER(38,0),
    first_name VARCHAR(16777216),
@@ -82,7 +83,7 @@ CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.franchise
 
 
 -- location table build
-CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.location
+CREATE TABLE IF NOT EXISTS {{env}}_tasty_bytes.raw_pos.location
 (
    location_id NUMBER(19,0),
    placekey VARCHAR(16777216),
@@ -95,7 +96,7 @@ CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.location
 
 
 -- menu table build
-CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.menu
+CREATE TABLE IF NOT EXISTS {{env}}_tasty_bytes.raw_pos.menu
 (
    menu_id NUMBER(19,0),
    menu_type_id NUMBER(38,0),
@@ -112,7 +113,7 @@ CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.menu
 
 
 -- truck table build
-CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.truck
+CREATE TABLE IF NOT EXISTS {{env}}_tasty_bytes.raw_pos.truck
 (
    truck_id NUMBER(38,0),
    menu_type_id NUMBER(38,0),
@@ -132,7 +133,7 @@ CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.truck
 
 
 -- order_header table build
-CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.order_header
+CREATE TABLE IF NOT EXISTS {{env}}_tasty_bytes.raw_pos.order_header
 (
    order_id NUMBER(38,0),
    truck_id NUMBER(38,0),
@@ -154,7 +155,7 @@ CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.order_header
 
 
 -- order_detail table build
-CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.order_detail
+CREATE TABLE IF NOT EXISTS {{env}}_tasty_bytes.raw_pos.order_detail
 (
    order_detail_id NUMBER(38,0),
    order_id NUMBER(38,0),
@@ -169,7 +170,7 @@ CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.order_detail
 
 
 -- customer loyalty table build
-CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_customer.customer_loyalty
+CREATE TABLE IF NOT EXISTS {{env}}_tasty_bytes.raw_customer.customer_loyalty
 (
    customer_id NUMBER(38,0),
    first_name VARCHAR(16777216),
@@ -293,17 +294,8 @@ USE WAREHOUSE demo_build_wh;
 
 
 -- country table load
--- COPY INTO {{env}}_tasty_bytes.raw_pos.country
--- (
---    country_id,
---    country,
---    iso_currency,
---    iso_country,
---    city_id,
---    city,
---    city_population
--- )
--- FROM @{{env}}_tasty_bytes.public.s3load/raw_pos/country/;
+ COPY INTO {{env}}_tasty_bytes.raw_pos.country
+ FROM @{{env}}_tasty_bytes.public.s3load/raw_pos/country/;
 
 
 -- franchise table load

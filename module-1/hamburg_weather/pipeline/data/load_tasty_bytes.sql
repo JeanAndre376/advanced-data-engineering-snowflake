@@ -70,7 +70,7 @@ CREATE OR REPLACE TABLE {{env}}_tasty_bytes.raw_pos.country
 
 
 -- franchise table build
-CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.franchise
+CREATE TABLE IF NOT EXISTS {{env}}_tasty_bytes.raw_pos.franchise
 (
    franchise_id NUMBER(38,0),
    first_name VARCHAR(16777216),
@@ -83,7 +83,7 @@ CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.franchise
 
 
 -- location table build
-CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.location
+CREATE TABLE IF NOT EXISTS {{env}}_tasty_bytes.raw_pos.location
 (
    location_id NUMBER(19,0),
    placekey VARCHAR(16777216),
@@ -96,7 +96,7 @@ CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.location
 
 
 -- menu table build
-CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.menu
+CREATE TABLE IF NOT EXISTS {{env}}_tasty_bytes.raw_pos.menu
 (
    menu_id NUMBER(19,0),
    menu_type_id NUMBER(38,0),
@@ -113,7 +113,7 @@ CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.menu
 
 
 -- truck table build
-CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.truck
+CREATE TABLE IF NOT EXISTS {{env}}_tasty_bytes.raw_pos.truck
 (
    truck_id NUMBER(38,0),
    menu_type_id NUMBER(38,0),
@@ -133,7 +133,7 @@ CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.truck
 
 
 -- order_header table build
-CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.order_header
+CREATE TABLE IF NOT EXISTS {{env}}_tasty_bytes.raw_pos.order_header
 (
    order_id NUMBER(38,0),
    truck_id NUMBER(38,0),
@@ -155,7 +155,7 @@ CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.order_header
 
 
 -- order_detail table build
-CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.order_detail
+CREATE TABLE IF NOT EXISTS {{env}}_tasty_bytes.raw_pos.order_detail
 (
    order_detail_id NUMBER(38,0),
    order_id NUMBER(38,0),
@@ -170,7 +170,7 @@ CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.order_detail
 
 
 -- customer loyalty table build
-CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_customer.customer_loyalty
+CREATE TABLE IF NOT EXISTS {{env}}_tasty_bytes.raw_customer.customer_loyalty
 (
    customer_id NUMBER(38,0),
    first_name VARCHAR(16777216),
